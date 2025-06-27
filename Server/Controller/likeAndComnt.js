@@ -60,7 +60,7 @@ export const addComment = async (req, res) => {
 
     const updatedPost = await Post.findById(postId)
       .populate("userId", "username profilePicture")
-      .populate("likes", "_id")
+      .populate("likes", "username profilePicture")
       .populate("comments.userId", "username profilePic");
 
     return res.status(201).json( updatedPost );
@@ -96,7 +96,7 @@ export const deleteComment = async (req, res) => {
 
     const updatedPost = await Post.findById(postId)
       .populate("userId", "username profilePicture")
-      .populate("likes", "_id")
+      .populate("likes", "username profilePicture")
       .populate("comments.userId", "username profilePic");
 
     return res.status(200).json(updatedPost );
