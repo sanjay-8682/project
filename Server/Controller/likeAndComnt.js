@@ -96,7 +96,7 @@ export const deleteComment = async (req, res) => {
     const updatedPost = await Post.findById(postId)
       .populate("userId", "username profilePicture")
       .populate("likes", "username profilePicture")
-      .populate("comments.userId", "username profilePic");
+      .populate("comments.userId", "username profilePicture");
 
     return res.status(200).json(updatedPost );
   } catch (err) {
