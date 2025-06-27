@@ -30,7 +30,7 @@ app.use(cookieParser());
 // ✅ Dynamic CORS Setup
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://gleeful-faloodeh-558367.netlify.app' // 🔁 Replace after deploying frontend
+  'https://shiny-macaron-a63ffa.netlify.app' // 🔁 Replace after deploying frontend
 ];
 
 app.use(
