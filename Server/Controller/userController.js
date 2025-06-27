@@ -9,7 +9,7 @@ dotenv.config()
 
 export const registerUser = async (req, res) => {
   try {
-    const { username, password, email,profilePicture } = req.body;
+    const { username, password, email, profilePicture } = req.body;
 
     if (!username || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
@@ -22,7 +22,7 @@ export const registerUser = async (req, res) => {
 
     const hashPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ username, email, password: hashPassword,profilePicture });
+    const newUser = new User({ username, email, password: hashPassword, profilePicture });
     await newUser.save();
 
     res.status(200).json({ message: "User registered successfully", data: newUser });
@@ -53,13 +53,12 @@ export const loginUser = async (req, res) => {
     });
 
     // 🍪 Send token in HTTP-only cookie
-    res
-      .cookie('token', token, {
-        httpOnly: true,
-        secure: false, // 🔁 set to true in production with HTTPS
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 1000, // 1 hour in milliseconds
-      })
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true,          // ✅ Cookie only over HTTPS (Netlify + Render)
+      sameSite: 'None',      // ✅ Allow cross-site cookies (Netlify → Render)
+      maxAge: 60 * 60 * 1000 // 1 hour
+    })
       .status(200)
       .json({
         message: 'Login Successfully',
@@ -188,4 +187,4 @@ export const getAllUsers = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch users' });
   }
 };
- 
+
