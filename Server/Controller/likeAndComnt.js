@@ -51,7 +51,6 @@ export const addComment = async (req, res) => {
 
     const comment = {
       userId: user._id,
-      username: user.username,
       text,
     };
 
